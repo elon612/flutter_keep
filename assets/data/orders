@@ -1,0 +1,112 @@
+[
+  {
+    "order_id":"1",
+    "order_sn":"20210519000001",
+    "add_time":"16214062000",
+    "order_amount":"546.00",
+    "product_amount": "526.00",
+    "pay_amount":"0.00",
+    "shipping_fee":"20.00",
+    "order_status":"-1",
+    "order_status_text":"已取消",
+    "address": {
+      "addr_id":"1",
+      "uid":"1",
+      "consignee":"狂徒张三",
+      "province_id":"16",
+      "city_id":"221",
+      "county_id":"1851",
+      "province_name":"江苏省",
+      "city_name":"苏州市",
+      "county_name":"吴中区",
+      "address":"强国路，xxxx号 xxxx 公司 xxxx 收",
+      "mobile":"13900000000"
+    },
+    "shipping": {
+      "shipping_id":"3",
+      "shipping_name":"顺丰寄付"
+    },
+    "items":[
+      {
+        "prd_id":"11",
+        "sku_id":1101,
+        "number":1,
+        "weight":"250",
+        "product_name":"플라워 머메이드 원피스",
+        "prop_value": "象牙 S",
+        "price":526.00,
+        "pic": "assets/data/images/order_image1.jpeg"
+      }
+    ]
+  },
+  {
+    "order_id":"2",
+    "order_sn":"20210519000002",
+    "add_time":"16214062222",
+    "order_amount":"1240.00",
+    "product_amount": "1230.00",
+    "pay_amount":"0.00",
+    "shipping_fee":"10.00",
+    "order_status":"0",
+    "order_status_text":"待支付",
+    "address": {
+      "addr_id":"1",
+      "uid":"1",
+      "consignee":"狂徒张三",
+      "province_id":"16",
+      "city_id":"221",
+      "county_id":"1851",
+      "province_name":"江苏省",
+      "city_name":"苏州市",
+      "county_name":"吴中区",
+      "address":"强国路，xxxx号 xxxx 公司 xxxx 收",
+      "mobile":"13900000000"
+    },
+    "shipping": {
+      "shipping_id":"1",
+      "shipping_name":"圆通速递"
+    },
+    "items":[
+      {
+        "prd_id":"15",
+        "sku_id": 1501,
+        "number":2,
+        "weight":"200",
+        "product_name":"아페민[516]-메쉬 배색 브이넥 실키 민소매 블라우스",
+        "prop_value": "黑色 XL",
+        "price":90.00,
+        "pic": "assets/data/images/order_image2.jpeg"
+      },
+      {
+        "prd_id":"14",
+        "sku_id": 1401,
+        "number":3,
+        "weight":"200",
+        "product_name":"[키첼] 리다 패턴 블라우스 니트",
+        "prop_value": "米色 FREE",
+        "price":150.00,
+        "pic": "assets/data/images/order_image3.jpeg"
+      },
+      {
+        "prd_id":"13",
+        "sku_id":1301,
+        "number":1,
+        "weight":"200",
+        "product_name":"라코스테 여성 원피스 EF8470",
+        "prop_value": "黑色 XS",
+        "price":550.00,
+        "pic": "assets/data/images/order_image4.jpeg"
+      },
+      {
+        "prd_id":"12",
+        "sku_id":1201,
+        "number":2,
+        "weight":"250",
+        "product_name":"페미닌 펀칭 자켓 J212AJK031",
+        "prop_value": "黑色 FREE",
+        "price":230.00,
+        "pic": "assets/data/images/order_image5.jpeg"
+      }
+    ]
+  }
+]

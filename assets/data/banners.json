@@ -1,0 +1,16 @@
+[
+  {
+    "id": 101,
+    "type": 2,
+    "title": "[xxxxx] 品牌上架通知",
+    "content": "[xxxxx] 新品上架，xxxx,",
+    "pic": "assets/data/images/banner1.jpeg"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%",
+    "pic": "assets/data/images/banner2.jpeg"
+  }
+]

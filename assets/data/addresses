@@ -1,0 +1,16 @@
+[
+  {
+    "addr_id":"1",
+    "uid":"1",
+    "consignee":"狂徒张三",
+    "province_id":"16",
+    "city_id":"221",
+    "county_id":"1851",
+    "province_name":"江苏省",
+    "city_name":"苏州市",
+    "county_name":"吴中区",
+    "address":"强国路，xxxx号 xxxx 公司 xxxx 收",
+    "mobile":"13900000000",
+    "is_check":"1"
+  }
+]

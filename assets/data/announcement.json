@@ -1,0 +1,135 @@
+[
+  {
+    "id": 101,
+    "type": 2,
+    "title": "[xxxxx] 品牌上架通知",
+    "content": "[xxxxx] 新品上架，xxxx,",
+    "pic": ""
+  },
+  {
+    "id": 100,
+    "type": 4,
+    "title": "清明放假通知",
+    "content": "清明放假通知，暂不发货"
+  },
+  {
+    "id": 101,
+    "type": 2,
+    "title": "[xxxxx] 品牌上架通知",
+    "content": "[xxxxx] 新品上架，xxxx,"
+  },
+  {
+    "id": 102,
+    "type": 4,
+    "title": "五一放假通知",
+    "content": "清明放假通知，暂不发货"
+  },
+  {
+    "id": 103,
+    "type": 2,
+    "title": "[yyyyy] 商品下架通知",
+    "content": "[xxxxx] 商品下架，xxxx,"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 1,
+    "title": "返利优惠",
+    "content": "[xxxx] 品牌返利 10%"
+  },
+  {
+    "id": 104,
+    "type": 3,
+    "title": "[xxxx] 快递停止发货",
+    "content": "[xxxx] 快递停止发货"
+  },
+  {
+    "id": 104,
+    "type": 3,
+    "title": "[xxxx] 快递停止发货",
+    "content": "[xxxx] 快递停止发货"
+  },
+  {
+    "id": 104,
+    "type": 3,
+    "title": "[xxxx] 快递停止发货",
+    "content": "[xxxx] 快递停止发货"
+  },
+  {
+    "id": 104,
+    "type": 3,
+    "title": "[xxxx] 快递停止发货",
+    "content": "[xxxx] 快递停止发货"
+  },
+  {
+    "id": 104,
+    "type": 3,
+    "title": "[xxxx] 快递停止发货",
+    "content": "[xxxx] 快递停止发货"
+  }
+]

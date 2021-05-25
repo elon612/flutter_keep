@@ -1,0 +1,13 @@
+[
+  {
+    "cart_id": "1",
+    "prd_id": "1",
+    "sku_id": 1,
+    "number": 10,
+    "prop_value": "黑色 S",
+    "pic": "assets/data/images/product_list.jpeg",
+    "product_name": "修身H裙（S〜L）",
+    "price": 69.0
+  }
+]
+

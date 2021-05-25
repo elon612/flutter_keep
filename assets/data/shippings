@@ -1,0 +1,18 @@
+[
+  {
+    "shipping_id":"1",
+    "shipping_name":"圆通速递"
+  },
+  {
+    "shipping_id":"2",
+    "shipping_name":"中通快递"
+  },
+  {
+    "shipping_id":"3",
+    "shipping_name":"顺丰寄付"
+  },
+  {
+    "shipping_id":"4",
+    "shipping_name":"顺丰到付"
+  }
+]
