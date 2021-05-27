@@ -4,9 +4,9 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "0cdd9d549ffa4f0c870dfe659be30793",
-"index.html": "59041ce4874488355754bb1dc3f04aa8",
-"/": "59041ce4874488355754bb1dc3f04aa8",
-"main.dart.js": "3db7e812cf38192edafcb43beb9f8a51",
+"index.html": "40aa258b7f80ce18047e7d8ec9387873",
+"/": "40aa258b7f80ce18047e7d8ec9387873",
+"main.dart.js": "e13571e4a0bd4a70b4f2b88d4116f8b9",
 "favicon.png": "417b4caf3b33f72918b4ea4282747322",
 "icons/Icon-192.png": "21f6824f5287328daf86fae16694dc01",
 "icons/Icon-512.png": "5a60d8d794d20b6f3edb0e73a080075f",
@@ -80,7 +80,7 @@ const RESOURCES = {
 "assets/assets/images/3.0x/home_action_cart.png": "12fe2ea8417d8ed9c591ae3546f2b6f0",
 "assets/assets/images/3.0x/home_logo.png": "b6f36e5c7a101c5fb6c3590e0bcba5e7",
 "assets/assets/images/3.0x/mine_order_message.png": "6a596965f047ef2f7fca6848666add39",
-"assets/assets/images/3.0x/mine_order.png": "8620294c2d0cb1d97949766701a57e4d",
+"assets/assets/images/3.0x/mine_order.png": "101d842196f582cc326cf3b7cf0a2085",
 "assets/assets/images/3.0x/cart_check_active.png": "d3dbd5245fdbc1fda020798f448c3524",
 "assets/assets/images/3.0x/empty_order.png": "87d07459f23c94079ad1baad4b7f88a3",
 "assets/assets/images/3.0x/product_brand_icon.png": "3bba3c1fa9b635c1b4eecfa5c2123fe1",
