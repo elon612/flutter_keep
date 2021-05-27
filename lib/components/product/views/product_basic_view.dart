@@ -12,53 +12,51 @@ class ProductBasicView extends StatelessWidget {
     final titleStyle = textStyle.copyWith(fontWeight: FontWeight.bold);
     final priceStyle =
         textStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 24);
-    return SliverToBoxAdapter(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        padding: const EdgeInsets.only(
-          top: 16,
-          left: 12,
-          right: 12,
-          bottom: 8,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                R.assets.productBrandIcon.image(),
-                Gaps.hGap4,
-                Text(
-                  '女孩日记',
-                  style: TextStyle(
-                    color: Colours.textGrey2,
-                    fontSize: 12,
-                  ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.white,
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.only(
+        top: 16,
+        left: 12,
+        right: 12,
+        bottom: 8,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              R.assets.productBrandIcon.image(),
+              Gaps.hGap4,
+              Text(
+                '女孩日记',
+                style: TextStyle(
+                  color: Colours.textGrey2,
+                  fontSize: 12,
                 ),
-              ],
-            ),
-            Gaps.vGap8,
-            Text('修身H裙（S〜L）', style: titleStyle),
-            Gaps.vGap8,
-            Row(
-              children: [
-                Text(
-                  '¥',
-                  style: unitStyle,
-                ),
-                Gaps.hGap4,
-                Text(
-                  '69',
-                  style: priceStyle,
-                ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          ),
+          Gaps.vGap8,
+          Text('修身H裙（S〜L）', style: titleStyle),
+          Gaps.vGap8,
+          Row(
+            children: [
+              Text(
+                '¥',
+                style: unitStyle,
+              ),
+              Gaps.hGap4,
+              Text(
+                '69',
+                style: priceStyle,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

@@ -5,6 +5,15 @@ import 'page_status.dart';
 export 'product_item_widget.dart';
 export 'product_list_widget.dart';
 export 'page_status.dart';
+export 'sliver_header_delegate.dart';
+
+ButtonStyle get defaultButtonStyle => ButtonStyle(
+      minimumSize: MaterialStateProperty.all(
+        Size(88, 32),
+      ),
+      padding: MaterialStateProperty.all(EdgeInsets.zero),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    );
 
 extension PageStatusExtension on PageStatus {
   Widget when(BuildContext context, {Widget builder(BuildContext context)}) {

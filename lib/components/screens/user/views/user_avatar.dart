@@ -13,26 +13,27 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        height: 228,
-        width: double.maxFinite,
-        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case AuthenticationStatus.unknown:
-              case AuthenticationStatus.unauthenticated:
-                return _UnLogInAvatar(
-                  onTap: () => RouterUtil.toLogin(context),
-                );
-              case AuthenticationStatus.authenticated:
-                return _LoggedAvatar(
-                  user: state.user,
-                );
-              default:
-                return Container();
-            }
-          },
-        ));
+      color: Colors.white,
+      height: 228,
+      width: double.maxFinite,
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case AuthenticationStatus.unknown:
+            case AuthenticationStatus.unauthenticated:
+              return _UnLogInAvatar(
+                onTap: () => RouterUtil.toLogin(context),
+              );
+            case AuthenticationStatus.authenticated:
+              return _LoggedAvatar(
+                user: state.user,
+              );
+            default:
+              return Container();
+          }
+        },
+      ),
+    );
   }
 }
 

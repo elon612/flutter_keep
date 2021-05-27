@@ -31,7 +31,6 @@ dependencies:
 
   date_format: ^2.0.2
   keyboard_actions: ^3.4.0
-  cached_network_image: ^3.0.0
   cupertino_icons: ^1.0.3
   pull_to_refresh: ^1.6.5
   carousel_slider: ^3.0.0

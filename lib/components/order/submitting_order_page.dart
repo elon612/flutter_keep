@@ -26,8 +26,10 @@ extension on SubmittingOrderError {
 }
 
 class SubmittingOrderPage extends StatelessWidget {
-  const SubmittingOrderPage({Key key, this.items}) : super(key: key);
+  SubmittingOrderPage({Key key, this.items}) : super(key: key);
   final List<ShoppingCartItem> items;
+
+  final FocusNode _node = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,8 @@ class SubmittingOrderPage extends StatelessWidget {
             return Column(
               children: [
                 Expanded(
-                    child: SingleChildScrollView(
+                    child: CustomKeyboardWrapper(
+                  keyboardConfig: buildKeyboardActionsConfig(context, [_node]),
                   child: Container(
                     color: Colours.greyBackground,
                     padding: contentPadding,
@@ -103,7 +106,8 @@ class SubmittingOrderPage extends StatelessWidget {
                                 rightText: '+ ¥${state.shippingFee}',
                               ),
                               Gaps.vGap16,
-                              _OrderNotesWidget(
+                              _OrderRemarkWidget(
+                                focusNode: _node,
                                 titleStyle: sectionStyle,
                               ),
                             ],
@@ -186,9 +190,10 @@ class _SubmittedButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: TextButton(
+                    style: defaultButtonStyle,
                     child: Text(
                       '提交订单',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyles.text.copyWith(color: Colors.white),
                     ),
                     onPressed: () => context
                         .read<SubmittingOrderBloc>()
@@ -277,16 +282,17 @@ class _OrderProductPart extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: list
                       .map((e) => ListTile(
+                            onTap: () {
+                              setState(() {
+                                toChecked = e;
+                              });
+                            },
                             leading: Radio<bool>(
                               fillColor:
                                   MaterialStateProperty.all(Colours.text),
                               value: toChecked == e,
                               groupValue: true,
-                              onChanged: (v) {
-                                setState(() {
-                                  toChecked = e;
-                                });
-                              },
+                              onChanged: (v) {},
                             ),
                             title: Text(e.shippingName),
                           ))
@@ -305,28 +311,19 @@ class _OrderProductPart extends StatelessWidget {
   }
 }
 
-class _OrderNotesWidget extends StatefulWidget {
-  const _OrderNotesWidget({Key key, this.titleStyle}) : super(key: key);
+class _OrderRemarkWidget extends StatelessWidget {
+  const _OrderRemarkWidget({Key key, this.focusNode, this.titleStyle})
+      : super(key: key);
+
+  final FocusNode focusNode;
+
   final TextStyle titleStyle;
-
-  @override
-  __OrderNotesWidgetState createState() => __OrderNotesWidgetState();
-}
-
-class __OrderNotesWidgetState extends State<_OrderNotesWidget> {
-  FocusNode _node;
-
-  @override
-  void initState() {
-    _node = FocusNode();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     Widget textField = Expanded(
       child: TextField(
-        focusNode: _node,
+        focusNode: focusNode,
         style: TextStyle(fontSize: 12.0),
         textDirection: TextDirection.rtl,
         onChanged: (v) => (v),
@@ -342,7 +339,7 @@ class __OrderNotesWidgetState extends State<_OrderNotesWidget> {
 
     return Row(
       children: [
-        Text('订单备注', style: widget.titleStyle),
+        Text('订单备注', style: titleStyle),
         Gaps.hGap10,
         textField,
       ],

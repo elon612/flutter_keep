@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keep/constants/constants.dart';
 import 'package:flutter_keep/widgets/widgets.dart';
 
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
+    as ex;
+
 const double _kBorderWidth = 0.5;
 const Color _kBorderColor = Color(0xfffafafa);
 
@@ -22,168 +25,181 @@ class InfoTabView extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 28),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _HeaderRow(
-              text: '商品信息',
+      child: ex.NestedScrollViewInnerScrollPositionKeyWidget(
+        const Key('product_tab1'),
+        CustomScrollView(
+          key: const PageStorageKey('product_info_tab'),
+          physics: const ClampingScrollPhysics(),
+          slivers: [
+            SliverOverlapInjector(
+              handle:
+                  ex.NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             ),
-            Table(
-              border: border,
-              columnWidths: columnWidths,
-              children: [
-                TableRow(children: [
-                  _TextCell(
-                    text: '韩网名称',
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  _HeaderRow(
+                    text: '商品信息',
                   ),
-                  _TextCell(
-                    text: '[Dearest] Canele (nb) -네이비',
-                    alignment: Alignment.centerLeft,
-                    padding: contentPadding,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '商品编号',
-                  ),
-                  _TextCell(
-                    text: '악녀일기-301778587',
-                    alignment: Alignment.centerLeft,
-                    padding: contentPadding,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '商品描述',
-                  ),
-                  _TextCell(
-                    text: '修身 时尚 中长款',
-                    alignment: Alignment.centerLeft,
-                    padding: contentPadding,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '商品材质',
-                  ),
-                  _TextCell(
-                    text: '涤纶91% 氨纶9%',
-                    alignment: Alignment.centerLeft,
-                    padding: contentPadding,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '产地',
-                  ),
-                  _TextCell(
-                    text: '韩国',
-                    alignment: Alignment.centerLeft,
-                    padding: contentPadding,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '详情',
-                  ),
-                  _TextCell(
-                    height: 150,
-                    text: """
+                  Table(
+                    border: border,
+                    columnWidths: columnWidths,
+                    children: [
+                      TableRow(children: [
+                        _TextCell(
+                          text: '韩网名称',
+                        ),
+                        _TextCell(
+                          text: '[Dearest] Canele (nb) -네이비',
+                          alignment: Alignment.centerLeft,
+                          padding: contentPadding,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '商品编号',
+                        ),
+                        _TextCell(
+                          text: '악녀일기-301778587',
+                          alignment: Alignment.centerLeft,
+                          padding: contentPadding,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '商品描述',
+                        ),
+                        _TextCell(
+                          text: '修身 时尚 中长款',
+                          alignment: Alignment.centerLeft,
+                          padding: contentPadding,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '商品材质',
+                        ),
+                        _TextCell(
+                          text: '涤纶91% 氨纶9%',
+                          alignment: Alignment.centerLeft,
+                          padding: contentPadding,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '产地',
+                        ),
+                        _TextCell(
+                          text: '韩国',
+                          alignment: Alignment.centerLeft,
+                          padding: contentPadding,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '详情',
+                        ),
+                        _TextCell(
+                          height: 150,
+                          text: """
 由于测量方法不同,尺寸数据可能存在单面1~3cm误差；
 由于电脑显示器的分辨率不同可能出现一些色差；
 实际颜色与细节图片相似，请参考图片；
 洗涤方式：建议手洗，干洗。
                    """,
-                    alignment: Alignment.centerLeft,
-                    padding: contentPadding,
+                          alignment: Alignment.centerLeft,
+                          padding: contentPadding,
+                        ),
+                      ]),
+                    ],
                   ),
-                ]),
-              ],
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            _HeaderRow(
-              text: '商品尺寸',
-            ),
-            Table(
-              border: border,
-              columnWidths: {
-                0: FractionColumnWidth(0.3),
-                1: FractionColumnWidth(0.233),
-                2: FractionColumnWidth(0.233),
-                3: FractionColumnWidth(0.233),
-              },
-              children: [
-                TableRow(children: [
-                  _TextCell(
-                    text: '尺寸',
+                  SizedBox(
+                    height: 25,
                   ),
-                  _TextCell(
-                    text: 'S',
-                    alignment: Alignment.center,
+                  _HeaderRow(
+                    text: '商品尺寸',
                   ),
-                  _TextCell(
-                    text: 'M',
-                    alignment: Alignment.center,
+                  Table(
+                    border: border,
+                    columnWidths: {
+                      0: FractionColumnWidth(0.3),
+                      1: FractionColumnWidth(0.233),
+                      2: FractionColumnWidth(0.233),
+                      3: FractionColumnWidth(0.233),
+                    },
+                    children: [
+                      TableRow(children: [
+                        _TextCell(
+                          text: '尺寸',
+                        ),
+                        _TextCell(
+                          text: 'S',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: 'M',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: 'L',
+                          alignment: Alignment.center,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '总长',
+                        ),
+                        _TextCell(
+                          text: '61',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: '61',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: '61',
+                          alignment: Alignment.center,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '腰宽',
+                        ),
+                        _TextCell(
+                          text: '33',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: '35.5',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: '38',
+                          alignment: Alignment.center,
+                        ),
+                      ]),
+                      TableRow(children: [
+                        _TextCell(
+                          text: '臀宽',
+                        ),
+                        _TextCell(
+                          text: '42.5',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: '45',
+                          alignment: Alignment.center,
+                        ),
+                        _TextCell(
+                          text: '47.5',
+                          alignment: Alignment.center,
+                        ),
+                      ]),
+                    ],
                   ),
-                  _TextCell(
-                    text: 'L',
-                    alignment: Alignment.center,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '总长',
-                  ),
-                  _TextCell(
-                    text: '61',
-                    alignment: Alignment.center,
-                  ),
-                  _TextCell(
-                    text: '61',
-                    alignment: Alignment.center,
-                  ),
-                  _TextCell(
-                    text: '61',
-                    alignment: Alignment.center,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '腰宽',
-                  ),
-                  _TextCell(
-                    text: '33',
-                    alignment: Alignment.center,
-                  ),
-                  _TextCell(
-                    text: '35.5',
-                    alignment: Alignment.center,
-                  ),
-                  _TextCell(
-                    text: '38',
-                    alignment: Alignment.center,
-                  ),
-                ]),
-                TableRow(children: [
-                  _TextCell(
-                    text: '臀宽',
-                  ),
-                  _TextCell(
-                    text: '42.5',
-                    alignment: Alignment.center,
-                  ),
-                  _TextCell(
-                    text: '45',
-                    alignment: Alignment.center,
-                  ),
-                  _TextCell(
-                    text: '47.5',
-                    alignment: Alignment.center,
-                  ),
-                ]),
-              ],
+                ],
+              ),
             ),
           ],
         ),

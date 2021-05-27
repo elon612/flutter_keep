@@ -58,12 +58,12 @@ class _UserScreenState extends State<UserScreen>
                   text: '地址管理',
                   onTap: () => RouterUtil.toAddressList(context),
                 ),
-                // Gaps.vGap4,
-                // _UserItemView(
-                //   icon: R.assets.mineOrderMessage.image(),
-                //   text: '消息通知',
-                //   onTap: () => {},
-                // ),
+                Gaps.vGap4,
+                _UserItemView(
+                  icon: R.assets.mineOrderMessage.image(),
+                  text: '网站公告',
+                  onTap: () => RouterUtil.toNoticeList(context),
+                ),
                 Gaps.vGap16,
                 // _UserItemView(
                 //   icon: R.assets.mineFeedback.image(),

@@ -106,8 +106,8 @@ enum StateType {
   /// 加载中
   loading,
 
-  /// 空
-  empty
+  /// 购物车 - 未授权
+  cartUnauthenticated,
 }
 
 extension StateTypeExtension on StateType {
@@ -126,6 +126,6 @@ extension StateTypeExtension on StateType {
         R.assets.emptyAddress.image(),
         Icon(Icons.wifi_lock),
         CupertinoActivityIndicator(),
-        Container(),
+        R.assets.emptyShoppingCart.image(),
       ][index];
 }

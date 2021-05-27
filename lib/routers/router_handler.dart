@@ -9,18 +9,20 @@ final notFoundHandler = Handler(
 );
 
 final mainHandler = Handler(
-    handlerFunc: (_, __) => MainPage(
-          key: Application.mainKey,
-        ));
+  handlerFunc: (_, __) => MainPage(
+    key: Application.mainKey,
+  ),
+);
 
 final noticeListHandler = Handler(
   handlerFunc: (_, __) => NoticeListPage(),
 );
 
 final noticeHandler = Handler(
-    handlerFunc: (context, __) => NoticePage(
-          id: context.settings.arguments,
-        ));
+  handlerFunc: (context, __) => NoticePage(
+    id: context.settings.arguments,
+  ),
+);
 
 final searchHandler = Handler(
   handlerFunc: (_, __) => SearchPage(),

@@ -73,26 +73,29 @@ class _PayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderPaymentCubit, OrderPaymentState>(
-      builder: (context, state) => state.status ==
-              FormzStatus.submissionInProgress
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              child: TextButton(
-                  style: ButtonStyle(
-                      minimumSize:
-                          MaterialStateProperty.all(Size(double.maxFinite, 48)),
+      builder: (context, state) =>
+          state.status == FormzStatus.submissionInProgress
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  margin: EdgeInsets.symmetric(horizontal: 24),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(
+                        Size(double.maxFinite, 48),
+                      ),
                       backgroundColor: MaterialStateProperty.all(
                         Theme.of(context).primaryColor,
-                      )),
-                  onPressed: () => context.read<OrderPaymentCubit>().onPay(),
-                  child: Text(
-                    '确认支付',
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ),
+                      ),
+                    ),
+                    onPressed: () => context.read<OrderPaymentCubit>().onPay(),
+                    child: Text(
+                      '确认支付',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
     );
   }
 }
@@ -106,57 +109,59 @@ class _ContentView extends StatelessWidget {
       height: 1,
     );
     return BlocBuilder<OrderPaymentCubit, OrderPaymentState>(
-        builder: (context, state) => Column(
-              children: [
-                Gaps.vGap20,
-                Container(
-                  color: Colors.white,
-                  child: ListTile(
-                    title: Text('选择支付方式'),
+      builder: (context, state) => Column(
+        children: [
+          Gaps.vGap20,
+          Container(
+            color: Colors.white,
+            child: ListTile(
+              title: Text('选择支付方式'),
+            ),
+          ),
+          divider,
+          Column(
+            children: PaymentType.values
+                .map(
+                  (e) => InkWell(
+                    onTap: () =>
+                        context.read<OrderPaymentCubit>().paymentOnChanged(e),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 8),
+                          child: Row(
+                            children: [
+                              Gaps.hGap10,
+                              Image(
+                                image: e.image,
+                                width: 26,
+                              ),
+                              Gaps.hGap8,
+                              Text(
+                                e.message(context),
+                                style: TextStyles.text14,
+                              ),
+                              Spacer(),
+                              Checkbox(
+                                  activeColor: Colours.text,
+                                  value: state.type == e,
+                                  onChanged: (v) => {}),
+                            ],
+                          ),
+                        ),
+                        divider,
+                      ],
+                    ),
                   ),
-                ),
-                divider,
-                Column(
-                  children: PaymentType.values
-                      .map((e) => InkWell(
-                            onTap: () => context
-                                .read<OrderPaymentCubit>()
-                                .paymentOnChanged(e),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 8),
-                                  child: Row(
-                                    children: [
-                                      Gaps.hGap10,
-                                      Image(
-                                        image: e.image,
-                                        width: 26,
-                                      ),
-                                      Gaps.hGap8,
-                                      Text(
-                                        e.message(context),
-                                        style: TextStyles.text14,
-                                      ),
-                                      Spacer(),
-                                      Checkbox(
-                                          activeColor: Colours.text,
-                                          value: state.type == e,
-                                          onChanged: (v) => {}),
-                                    ],
-                                  ),
-                                ),
-                                divider,
-                              ],
-                            ),
-                          ))
-                      .toList(),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-              ],
-            ));
+                )
+                .toList(),
+          ),
+          SizedBox(
+            height: 24,
+          ),
+        ],
+      ),
+    );
   }
 }

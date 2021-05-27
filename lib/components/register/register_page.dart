@@ -74,34 +74,35 @@ class RegisterPage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          _PhoneInput(
-                            node: _mobileNode,
-                          ),
-                          Gaps.vGap20,
-                          _SecurityInput(
-                            node: _securityNode,
-                          ),
-                          Gaps.vGap20,
-                          _UserNameInput(
-                            node: _nameNode,
-                          ),
-                          Gaps.vGap20,
-                          _PasswordInput(
-                            node: _passwordNode,
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          _RegisterButton(),
-                          SizedBox(
-                            height: 22,
-                          ),
-                          _Agreement(),
-                        ],
-                      )),
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        _PhoneInput(
+                          node: _mobileNode,
+                        ),
+                        Gaps.vGap20,
+                        _SecurityInput(
+                          node: _securityNode,
+                        ),
+                        Gaps.vGap20,
+                        _UserNameInput(
+                          node: _nameNode,
+                        ),
+                        Gaps.vGap20,
+                        _PasswordInput(
+                          node: _passwordNode,
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        _RegisterButton(),
+                        SizedBox(
+                          height: 22,
+                        ),
+                        _Agreement(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -139,17 +140,18 @@ class _SecurityInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterBloc, RegisterState>(
-        builder: (context, state) => _CustomTextFiled(
-              node: node,
-              header: '验证码',
-              hintText: '请输入验证码',
-              errorText: state.security.invalid
-                  ? state.security.error.message(context)
-                  : null,
-              onChanged: (v) =>
-                  context.read<RegisterBloc>().add(SecurityOnChanged(v)),
-              trail: _SecurityButton(),
-            ));
+      builder: (context, state) => _CustomTextFiled(
+        node: node,
+        header: '验证码',
+        hintText: '请输入验证码',
+        errorText: state.security.invalid
+            ? state.security.error.message(context)
+            : null,
+        onChanged: (v) =>
+            context.read<RegisterBloc>().add(SecurityOnChanged(v)),
+        trail: _SecurityButton(),
+      ),
+    );
   }
 }
 
@@ -160,15 +162,15 @@ class _UserNameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterBloc, RegisterState>(
-        builder: (context, state) => _CustomTextFiled(
-              node: node,
-              header: '账号',
-              hintText: '请输入用户名',
-              errorText:
-                  state.name.invalid ? state.name.error.message(context) : null,
-              onChanged: (v) =>
-                  context.read<RegisterBloc>().add(NameOnChanged(v)),
-            ));
+      builder: (context, state) => _CustomTextFiled(
+        node: node,
+        header: '账号',
+        hintText: '请输入用户名',
+        errorText:
+            state.name.invalid ? state.name.error.message(context) : null,
+        onChanged: (v) => context.read<RegisterBloc>().add(NameOnChanged(v)),
+      ),
+    );
   }
 }
 
@@ -179,16 +181,17 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterBloc, RegisterState>(
-        builder: (context, state) => _CustomTextFiled(
-              node: node,
-              header: '密码',
-              hintText: '请输入登陆密码',
-              errorText: state.password.invalid
-                  ? state.password.error.message(context)
-                  : null,
-              onChanged: (v) =>
-                  context.read<RegisterBloc>().add(PasswordOnChanged(v)),
-            ));
+      builder: (context, state) => _CustomTextFiled(
+        node: node,
+        header: '密码',
+        hintText: '请输入登陆密码',
+        errorText: state.password.invalid
+            ? state.password.error.message(context)
+            : null,
+        onChanged: (v) =>
+            context.read<RegisterBloc>().add(PasswordOnChanged(v)),
+      ),
+    );
   }
 }
 

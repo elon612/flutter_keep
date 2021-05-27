@@ -38,17 +38,20 @@ class ShoppingCartBottomSheet extends StatelessWidget {
   static showBottomSheet(BuildContext context, List<Sku> skus,
       List<SkuItems> skuItems, ProductDetailInfo info) async {
     return showModalBottomSheet(
-        context: context,
-        builder: (context) => ShoppingCartBottomSheet(
-              skus: skus,
-              skuItems: skuItems,
-              info: info,
-            ),
-        isScrollControlled: true,
-        enableDrag: false,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
-        ));
+      context: context,
+      builder: (context) => ShoppingCartBottomSheet(
+        skus: skus,
+        skuItems: skuItems,
+        info: info,
+      ),
+      isScrollControlled: true,
+      enableDrag: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(12.0),
+        ),
+      ),
+    );
   }
 
   @override
@@ -129,12 +132,12 @@ class ShoppingCartBottomSheet extends StatelessWidget {
             Spacer(),
             CounterWidget(
               value: state.number.toString(),
-              minusOnTap: () => context
-                  .read<ShoppingCartSheetBloc>()
-                  .add(ShoppingCartSheetNumberMinusOnClicked()),
-              plusOnTap: () => context
-                  .read<ShoppingCartSheetBloc>()
-                  .add(ShoppingCartSheetNumberPlusOnClicked()),
+              minusOnTap: () => context.read<ShoppingCartSheetBloc>().add(
+                    ShoppingCartSheetNumberMinusOnClicked(),
+                  ),
+              plusOnTap: () => context.read<ShoppingCartSheetBloc>().add(
+                    ShoppingCartSheetNumberPlusOnClicked(),
+                  ),
             ),
           ],
         );
@@ -247,49 +250,51 @@ class _ShoppingCartSkuWidget extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: state.items
-              .map((e) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Gaps.vGap16,
-                      Text(
-                        e.name,
-                        style: boldStyle,
-                      ),
-                      Gaps.vGap12,
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 6,
-                        children: e.items.map((e) {
-                          final selected = state.selected.contains(e);
-                          final disabled = state.disableItems.contains(e);
-                          return GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              if (!disabled) {
-                                context
-                                    .read<ShoppingCartSheetBloc>()
-                                    .add(ShoppingCartSheetSkuItemOnClicked(e));
-                              }
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 80,
-                              alignment: Alignment.center,
-                              decoration: selected
-                                  ? selectedDecoration
-                                  : unselectedDecoration,
-                              child: Text(
-                                e.name,
-                                style: disabled ? disableStyle : textStyle,
-                              ),
+              .map(
+                (e) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gaps.vGap16,
+                    Text(
+                      e.name,
+                      style: boldStyle,
+                    ),
+                    Gaps.vGap12,
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 6,
+                      children: e.items.map((e) {
+                        final selected = state.selected.contains(e);
+                        final disabled = state.disableItems.contains(e);
+                        return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            if (!disabled) {
+                              context
+                                  .read<ShoppingCartSheetBloc>()
+                                  .add(ShoppingCartSheetSkuItemOnClicked(e));
+                            }
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 80,
+                            alignment: Alignment.center,
+                            decoration: selected
+                                ? selectedDecoration
+                                : unselectedDecoration,
+                            child: Text(
+                              e.name,
+                              style: disabled ? disableStyle : textStyle,
                             ),
-                          );
-                        }).toList(),
-                      ),
-                      Gaps.vGap16,
-                      Gaps.line,
-                    ],
-                  ))
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    Gaps.vGap16,
+                    Gaps.line,
+                  ],
+                ),
+              )
               .toList(),
         );
       },

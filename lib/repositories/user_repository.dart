@@ -285,6 +285,7 @@ class UserRepository {
       orderStatusText: '待付款',
       items: contained,
     );
+
     _orderItems = [..._orderItems, item];
     _cartRefresh();
     _orderRefresh();

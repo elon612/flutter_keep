@@ -16,6 +16,16 @@ import 'package:flutter_keep/components/common/common.dart';
 
 import 'blocs/blocs.dart';
 
+extension on ShoppingCartInputError {
+  String text(BuildContext context) {
+    switch (this) {
+      case ShoppingCartInputError.empty:
+        return '您还没有选择商品';
+    }
+    return '';
+  }
+}
+
 extension on ShoppingCartError {
   String text(BuildContext context) {
     switch (this) {
@@ -89,7 +99,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen>
           );
         }
         return CustomStateWidget(
-          type: StateType.cart,
+          type: StateType.cartUnauthenticated,
           actionText: '去登陆',
           actionOnTap: () => RouterUtil.toLogin(context),
         );
@@ -167,112 +177,112 @@ class _BottomBar extends StatelessWidget {
     final unitStyle = totalStyle.copyWith(color: Colours.text);
     final priceStyle = TextStyles.text.copyWith(fontWeight: FontWeight.bold);
 
-    return Container(
-      height: 49,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.symmetric(
-          vertical: BorderSide(
-            width: 0.2,
-            color: Colours.greyBackground,
+    return SafeArea(
+      child: Container(
+        height: 49,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.symmetric(
+            vertical: BorderSide(
+              width: 0.2,
+              color: Colours.greyBackground,
+            ),
           ),
         ),
-      ),
-      child: BlocConsumer<ShoppingCartBloc, ShoppingCartState>(
-        listener: (context, state) {
-          if (state.input.invalid) {
-            showToast(state.input.error.message(context));
-          } else if (state.formzStatus == FormzStatus.submissionSuccess) {
-            RouterUtil.toSubmitting(context, state.selected);
-          }
-        },
-        builder: (context, state) {
-          String total;
-          if (state.selected.isEmpty) {
-            total = '0';
-          } else {
-            double num = 0.0;
-            state.selected.forEach((e) {
-              num += (e.number * e.price);
-            });
-            total = num.toString();
-          }
+        child: BlocConsumer<ShoppingCartBloc, ShoppingCartState>(
+          listener: (context, state) {
+            if (state.input.invalid) {
+              showToast(state.input.error.text(context));
+            } else if (state.formzStatus == FormzStatus.submissionSuccess) {
+              RouterUtil.toSubmitting(context, state.selected);
+            }
+          },
+          builder: (context, state) {
+            String total;
+            if (state.selected.isEmpty) {
+              total = '0';
+            } else {
+              double num = 0.0;
+              state.selected.forEach((e) {
+                num += (e.number * e.price);
+              });
+              total = num.toString();
+            }
 
-          return Row(
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => context
-                    .read<ShoppingCartBloc>()
-                    .add(ShoppingCartAllCheckOnToggled()),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      width: 15,
-                    ),
-                    state.allChecked
-                        ? R.assets.cartCheckActive.image()
-                        : R.assets.cartCheck.image(),
-                    Gaps.hGap8,
-                    Text(
-                      '全选',
-                      style: TextStyle(
-                          color: Color(0xff000000),
-                          fontSize: 16,
-                          height: 1.375),
-                    ),
-                  ],
+            return Row(
+              children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => context
+                      .read<ShoppingCartBloc>()
+                      .add(ShoppingCartAllCheckOnToggled()),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: 15,
+                      ),
+                      state.allChecked
+                          ? R.assets.cartCheckActive.image()
+                          : R.assets.cartCheck.image(),
+                      Gaps.hGap8,
+                      Text(
+                        '全选',
+                        style: TextStyle(
+                            color: Color(0xff000000),
+                            fontSize: 16,
+                            height: 1.375),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Spacer(),
-              Text.rich(TextSpan(text: '合计：', style: totalStyle, children: [
-                TextSpan(text: '¥ ', style: unitStyle),
-                TextSpan(text: total, style: priceStyle),
-              ])),
-              Gaps.hGap8,
-              Container(
+                Spacer(),
+                Text.rich(TextSpan(text: '合计：', style: totalStyle, children: [
+                  TextSpan(text: '¥ ', style: unitStyle),
+                  TextSpan(text: total, style: priceStyle),
+                ])),
+                Gaps.hGap8,
+                Container(
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            Color(0xff4d4d4d),
-                            Color(0xff3c3c3c),
-                          ]),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [
+                          Color(0xff4d4d4d),
+                          Color(0xff3c3c3c),
+                        ]),
+                      ),
+                      child: TextButton(
+                        style: defaultButtonStyle,
+                        onPressed: () => context
+                            .read<ShoppingCartBloc>()
+                            .add(ShoppingCartOnSubmitted()),
+                        child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                          builder: (context, state) {
+                            int totalNumbers = 0;
+                            try {
+                              totalNumbers = state.selected
+                                  .map((e) => e.number)
+                                  .reduce((a, b) => a + b);
+                            } catch (_) {}
+                            return Text(
+                              '结算' +
+                                  "${totalNumbers == 0 ? '' : '($totalNumbers)'}",
+                              style:
+                                  TextStyles.text.copyWith(color: Colors.white),
+                            );
+                          },
                         ),
-                        child: TextButton(
-                          style: ButtonStyle(
-                              minimumSize:
-                                  MaterialStateProperty.all(Size(88, 32)),
-                              textStyle:
-                                  MaterialStateProperty.all(TextStyles.text)),
-                          onPressed: () => context
-                              .read<ShoppingCartBloc>()
-                              .add(ShoppingCartOnSubmitted()),
-                          child:
-                              BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                            builder: (context, state) {
-                              int totalNumbers = 0;
-                              try {
-                                totalNumbers = state.selected
-                                    .map((e) => e.number)
-                                    .reduce((a, b) => a + b);
-                              } catch (_) {}
-                              return Text(
-                                '结算' +
-                                    "${totalNumbers == 0 ? '' : '($totalNumbers)'}",
-                                style: TextStyle(color: Colors.white),
-                              );
-                            },
-                          ),
-                        )),
-                  )),
-            ],
-          );
-        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -418,8 +428,4 @@ class _ShoppingCartItemView extends StatelessWidget {
           ],
         ));
   }
-}
-
-extension _ShoppingCartValidateError on ShoppingCartInputError {
-  String message(BuildContext context) => ['您还没有选择商品哦'][index];
 }

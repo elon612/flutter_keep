@@ -14,11 +14,14 @@ class _SplashPageState extends State<SplashPage> {
       precacheImage(R.assets.launch, context);
     });
     Future.delayed(
-        Duration(milliseconds: 1500), () => RouterUtil.toMain(context));
+      Duration(milliseconds: 1500),
+      () => RouterUtil.toMain(context),
+    );
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Material(child: R.assets.launch.image(fit: BoxFit.cover));
+  Widget build(BuildContext context) => Material(
+        child: R.assets.launch.image(fit: BoxFit.cover),
+      );
 }

@@ -42,22 +42,24 @@ class ProductItemWidget extends StatelessWidget {
     );
 
     Widget title = Expanded(
-        child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          text,
-          Spacer(),
-          Row(
-            children: [unit, Gaps.hGap4, price],
-          )
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            text,
+            Spacer(),
+            Row(
+              children: [unit, Gaps.hGap4, price],
+            )
+          ],
+        ),
       ),
-    ));
+    );
 
     return GestureDetector(
-      onTap: () => onTap != null ? onTap() : RouterUtil.toProduct(context, null),
+      onTap: () =>
+          onTap != null ? onTap() : RouterUtil.toProduct(context, null),
       child: ClipRRect(
         borderRadius: borderRadius,
         child: Container(

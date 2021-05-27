@@ -19,22 +19,25 @@ class OrderDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OrderDetailBloc>(
-        create: (context) => OrderDetailBloc(
-              userRepository: context.read<UserRepository>(),
-            )..add(OrderDetailOnLoaded(orderId)),
-        child: Scaffold(
-          appBar: CustomAppBar(
-            title: Text('订单详情'),
-            elevation: 4,
-            backgroundColor: Colors.white,
+      create: (context) => OrderDetailBloc(
+        userRepository: context.read<UserRepository>(),
+      )..add(OrderDetailOnLoaded(orderId)),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: Text('订单详情'),
+          elevation: 4,
+          backgroundColor: Colors.white,
+        ),
+        body: BlocBuilder<OrderDetailBloc, OrderDetailState>(
+          builder: (context, state) => state.status.when(
+            context,
+            builder: (context) => _OrderDetailContentView(
+              orderItem: state.item,
+            ),
           ),
-          body: BlocBuilder<OrderDetailBloc, OrderDetailState>(
-            builder: (context, state) => state.status.when(context,
-                builder: (context) => _OrderDetailContentView(
-                      orderItem: state.item,
-                    )),
-          ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -282,28 +285,30 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          OrderButton(
-            text: '取消订单',
-            color: Color(0xffb2b2b2),
-            onPressed: () => {},
-          ),
-          Gaps.hGap12,
-          OrderButton(
-            text: '\u3000付款\u3000',
-            color: Colours.text,
-            onPressed: () => RouterUtil.toOrderPayment(context, item.orderId),
-          ),
-          Gaps.hGap20,
-        ],
+    return SafeArea(
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OrderButton(
+              text: '取消订单',
+              color: Color(0xffb2b2b2),
+              onPressed: () => {},
+            ),
+            Gaps.hGap12,
+            OrderButton(
+              text: '\u3000付款\u3000',
+              color: Colours.text,
+              onPressed: () => RouterUtil.toOrderPayment(context, item.orderId),
+            ),
+            Gaps.hGap20,
+          ],
+        ),
       ),
     );
   }

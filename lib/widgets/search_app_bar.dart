@@ -13,7 +13,9 @@ class SearchAppBar extends StatefulWidget {
       this.focusNode,
       this.color = const Color.fromARGB(255, 237, 236, 237),
       this.height,
-      this.onChanged})
+      this.onChanged,
+      this.textStyle,
+      this.hintStyle})
       : super(key: key);
 
   final Color color;
@@ -21,6 +23,10 @@ class SearchAppBar extends StatefulWidget {
   final void Function() onTap;
 
   final String hintText;
+
+  final TextStyle textStyle;
+
+  final TextStyle hintStyle;
 
   final double circularBorder;
 
@@ -51,7 +57,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle =
+    final textStyle = widget.textStyle ??
         TextStyle(color: Colours.textGrey, fontSize: 16, height: 1.6);
 
     return GestureDetector(
@@ -86,7 +92,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: widget.hintText,
-                  hintStyle: textStyle,
+                  hintStyle: widget.hintStyle ?? textStyle,
                 ),
               ))
             else

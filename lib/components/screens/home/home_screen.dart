@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen>
   List<Widget> _sliverBuilder(BuildContext context, List<Notice> notices) {
     return <Widget>[
       SliverPersistentHeader(
-        delegate: _SliverHeaderDelegate(
+        delegate: SliverHeaderDelegate(
           height: 40,
           child: _NoticeBar(
             notices: notices,
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       SliverPersistentHeader(
         pinned: true,
-        delegate: _SliverHeaderDelegate(
+        delegate: SliverHeaderDelegate(
           height: 40,
           child: Material(
             color: Colors.white,
@@ -236,28 +236,5 @@ class __NoticeBarState extends State<_NoticeBar> {
         },
       ),
     );
-  }
-}
-
-class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _SliverHeaderDelegate({this.child, this.height});
-  final Widget child;
-  final double height;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  double get maxExtent => height;
-
-  @override
-  double get minExtent => height;
-
-  @override
-  bool shouldRebuild(_SliverHeaderDelegate oldDelegate) {
-    return child != oldDelegate.child || height != oldDelegate.height;
   }
 }

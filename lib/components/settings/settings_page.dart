@@ -31,24 +31,25 @@ class _LogOutButton extends StatelessWidget {
 
   _showDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('注销'),
-              content: Text('确定要退出登录嘛？'),
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.pop(context), child: Text('取消')),
-                TextButton(
-                  onPressed: () {
-                    context
-                        .read<AuthenticationBloc>()
-                        .add(AuthenticationLogoutRequested());
-                    Navigator.pop(context);
-                  },
-                  child: Text('确定'),
-                ),
-              ],
-            ));
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('注销'),
+        content: Text('确定要退出登录嘛？'),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(context), child: Text('取消')),
+          TextButton(
+            onPressed: () {
+              context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested());
+              Navigator.pop(context);
+            },
+            child: Text('确定'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

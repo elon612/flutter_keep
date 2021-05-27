@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keep/constants/constants.dart';
 import 'package:flutter_keep/models/models.dart';
+import 'package:flutter_keep/widgets/widgets.dart';
 
 class OrderAddressView extends StatelessWidget {
   const OrderAddressView({Key key, this.address, this.onTap}) : super(key: key);
@@ -55,10 +56,12 @@ class OrderAddressView extends StatelessWidget {
             SizedBox(
               width: 22,
             ),
-            Icon(
-              Icons.arrow_forward_ios_sharp,
-              size: 14,
-            ),
+            onTap != null
+                ? Icon(
+                    Icons.arrow_forward_ios_sharp,
+                    size: 14,
+                  )
+                : Gaps.empty,
           ],
         ),
       ),

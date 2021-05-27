@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
@@ -27,6 +28,7 @@ class _CategoryLeftSideViewState extends State<CategoryLeftSideView> {
     final controller = widget.contentScrollController;
     controller.addListener(() {
       if (_scrolling) return;
+
       final index = widget.categories.indexOf(_selected);
       final offset = controller.offset;
       final offsets = _findItemOffsetY(widget.keys[index], offset);
@@ -38,6 +40,7 @@ class _CategoryLeftSideViewState extends State<CategoryLeftSideView> {
       }
       if (newIndex == index) return;
       if (newIndex > widget.categories.length || newIndex < 0) return;
+
       setState(() {
         _selected = widget.categories[newIndex];
       });
@@ -123,24 +126,32 @@ class _CategoryLeftSideViewState extends State<CategoryLeftSideView> {
     return [minY, maxY];
   }
 
+  Timer _lastTimer;
+
   void _sideOnTap(int index) {
     final lastIndex = widget.categories.indexOf(_selected);
     final item = widget.categories[index];
     double target = _findItemOffsetY(
             widget.keys[index], widget.contentScrollController.offset)
         .first;
+
     Duration duration =
-        Duration(milliseconds: min(300, 150 * (index - lastIndex).abs()));
-    if (duration <= Duration.zero) {
-      duration = Duration(milliseconds: 100);
+        Duration(milliseconds: min(300, 150 * ((index - lastIndex).abs())));
+    if (duration < Duration.zero) {
+      duration = Duration(milliseconds: 150);
     }
+
     _scrolling = true;
     widget.contentScrollController
         .animateTo(target, duration: duration, curve: Curves.linear);
     setState(() {
       _selected = item;
     });
-    Future.delayed(duration, () {
+
+    if (_lastTimer != null && _lastTimer.isActive) {
+      _lastTimer.cancel();
+    }
+    _lastTimer = Timer(duration * 2, () {
       _scrolling = false;
     });
   }

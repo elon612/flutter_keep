@@ -47,9 +47,11 @@ class OrderListPage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: OrderType.values
-                    .map((e) => _CustomTabBarView(
-                          type: e,
-                        ))
+                    .map(
+                      (e) => _CustomTabBarView(
+                        type: e,
+                      ),
+                    )
                     .toList(),
               ),
             )
@@ -93,11 +95,13 @@ class __CustomTabBarViewState extends State<_CustomTabBarView>
           refreshController: _controller)
         ..add(OrderListOnLoaded(widget.type)),
       child: BlocBuilder<OrderListBloc, OrderListState>(
-        builder: (context, state) => state.status.when(context,
-            builder: (context) => _OrderListView(
-                  items: state.items,
-                  controller: _controller,
-                )),
+        builder: (context, state) => state.status.when(
+          context,
+          builder: (context) => _OrderListView(
+            items: state.items,
+            controller: _controller,
+          ),
+        ),
       ),
     );
   }

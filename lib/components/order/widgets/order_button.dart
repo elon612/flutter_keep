@@ -14,11 +14,13 @@ class OrderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: Text(text, style: TextStyle(color: color),),
+      child: Text(
+        text,
+        style: TextStyle(color: color),
+      ),
       style: ButtonStyle(
-          padding: MaterialStateProperty.all(
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 24)),
-          minimumSize: MaterialStateProperty.all(Size(0, 0)),
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          minimumSize: MaterialStateProperty.all(Size(88, 32)),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
               side: BorderSide(color: color),

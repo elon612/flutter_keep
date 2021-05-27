@@ -26,14 +26,62 @@ extension on ProductError {
   }
 }
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({Key key, this.productId}) : super(key: key);
 
   final String productId;
 
+  @override
+  _ProductPageState createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
+
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   Widget get gapWrapper => SliverToBoxAdapter(
         child: Gaps.vGap20,
       );
+
+  List<Widget> _sliverBuilder(
+          BuildContext context, List<String> images, bool collected) =>
+      <Widget>[
+        SliverPersistentHeader(
+          delegate: SliverHeaderDelegate(
+            height: MediaQuery.of(context).size.width,
+            child: ProductHeaderView(
+              key: const Key('product_header_view'),
+              images: images,
+              collected: collected,
+            ),
+          ),
+        ),
+        gapWrapper,
+        SliverPersistentHeader(
+          delegate: SliverHeaderDelegate(
+            height: 112,
+            child: ProductBasicView(
+              key: const Key('product_basic_view'),
+            ),
+          ),
+        ),
+        gapWrapper,
+        CustomTabBar(
+          key: const Key('product_tab_bar'),
+          controller: _tabController,
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +90,7 @@ class ProductPage extends StatelessWidget {
         repository: context.read<ProductRepository>(),
         userRepository: context.read<UserRepository>(),
         bloc: context.read<AuthenticationBloc>(),
-      )..add(ProductOnLoaded(productId)),
+      )..add(ProductOnLoaded(widget.productId)),
       child: Scaffold(
         body: BlocConsumer<ProductBloc, ProductState>(
           listener: (context, state) {
@@ -59,36 +107,24 @@ class ProductPage extends StatelessWidget {
             return Column(
               children: [
                 Expanded(
-                  child: DefaultTabController(
-                    length: 2,
-                    child: ex.NestedScrollView(
-                      key: const Key('product_scroll_view'),
-                      headerSliverBuilder: (context, _) => [
-                        ProductHeaderView(
-                          key: const Key('product_header_view'),
-                          images: images,
-                          collected: state.collected,
-                        ),
-                        gapWrapper,
-                        ProductBasicView(
-                          key: const Key('product_basic_view'),
-                        ),
-                        gapWrapper,
-                        CustomTabBar(
-                          key: const Key('product_tab_bar'),
-                        ),
-                      ],
-                      body: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: TabBarView(
-                          key: const Key('product_tab_bar_view'),
-                          children: [
-                            ImageTabView(
-                              images: detailImages,
-                            ),
-                            InfoTabView(),
-                          ],
-                        ),
+                  child: ex.NestedScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    key: const Key('product_scroll_view'),
+                    headerSliverBuilder: (context, _) =>
+                        _sliverBuilder(context, images, state.collected),
+                    innerScrollPositionKeyBuilder: () =>
+                        Key('home_tab${_tabController.index}'),
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TabBarView(
+                        controller: _tabController,
+                        key: const Key('product_tab_bar_view'),
+                        children: [
+                          ImageTabView(
+                            images: detailImages,
+                          ),
+                          InfoTabView(),
+                        ],
                       ),
                     ),
                   ),

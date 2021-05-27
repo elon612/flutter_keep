@@ -43,9 +43,11 @@ class NoticeListPage extends StatelessWidget {
           children: [
             TabBar(
               tabs: _values
-                  .map((e) => Tab(
-                        text: e.text(context),
-                      ))
+                  .map(
+                    (e) => Tab(
+                      text: e.text(context),
+                    ),
+                  )
                   .toList(),
               labelColor: Colours.text,
               labelStyle: labelStyle,

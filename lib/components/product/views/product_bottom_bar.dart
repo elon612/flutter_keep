@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keep/components/common/common.dart';
 import 'package:flutter_keep/components/product/blocs/blocs.dart';
 import 'package:flutter_keep/components/screens/shopping_cart/shopping_cart_bottom_sheet.dart';
 import 'package:flutter_keep/constants/constants.dart';
@@ -16,31 +17,37 @@ class ProductBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(offset: Offset(0, 3), blurRadius: 3),
-      ]),
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          _FavoriteIcon(
-            collected: collected,
-            onTap: () =>
-                context.read<ProductBloc>().add(ProductCollectionOnClicked()),
-          ),
-          Gaps.hGap16,
-          _WebsiteIcon(
-            onTap: () => Utils.launchUrl(_url).catchError(
-                (e) => showSnackBar(context, content: Text(e.toString()))),
-          ),
-          Spacer(),
-          _ActionButton(
-            text: '加入购物车',
-            onPressed: () => ShoppingCartBottomSheet.showBottomSheet(
-                context, info.skus, info.skuItems, info),
-          )
-        ],
+    return SafeArea(
+      top: false,
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              offset: Offset(0, -1),
+              blurRadius: 1,
+              color: Colours.greyBackground),
+        ]),
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: [
+            _FavoriteIcon(
+              collected: collected,
+              onTap: () =>
+                  context.read<ProductBloc>().add(ProductCollectionOnClicked()),
+            ),
+            Gaps.hGap16,
+            _WebsiteIcon(
+              onTap: () => Utils.launchUrl(_url).catchError(
+                  (e) => showSnackBar(context, content: Text(e.toString()))),
+            ),
+            Spacer(),
+            _ActionButton(
+              text: '加入购物车',
+              onPressed: () => ShoppingCartBottomSheet.showBottomSheet(
+                  context, info.skus, info.skuItems, info),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -53,16 +60,16 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 32,
-      width: 88,
+    return DecoratedBox(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(colors: [
-            Color(0xff4d4d4d),
-            Color(0xff3c3c3c),
-          ])),
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(colors: [
+          Color(0xff4d4d4d),
+          Color(0xff3c3c3c),
+        ]),
+      ),
       child: TextButton(
+        style: defaultButtonStyle,
         child: Text(
           text,
           style: TextStyle(fontSize: 14, color: Colors.white),

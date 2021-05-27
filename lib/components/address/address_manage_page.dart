@@ -46,30 +46,33 @@ class AddressManagePage extends StatelessWidget {
           ],
         ),
         body: BlocListener<AddressManageBloc, AddressManageState>(
-            listener: (context, state) {
-              if (state.status == FormzStatus.submissionSuccess) {
-                showToast(address != null ? '编辑成功' : '添加成功');
-                Navigator.pop(context);
-              }
-            },
-            child: CustomKeyboardWrapper(
-              keyboardConfig: buildKeyboardActionsConfig(context, [
-                _addresseeNode,
-                _mobileNode,
-                _addressNode,
-              ]),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _AddressFormView(
+          listener: (context, state) {
+            if (state.status == FormzStatus.submissionSuccess) {
+              showToast(address != null ? '编辑成功' : '添加成功');
+              Navigator.pop(context);
+            }
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: CustomKeyboardWrapper(
+                  keyboardConfig: buildKeyboardActionsConfig(context, [
+                    _addresseeNode,
+                    _mobileNode,
+                    _addressNode,
+                  ]),
+                  child: _AddressFormView(
                     addresseeNode: _addresseeNode,
                     mobileNode: _mobileNode,
                     addressNode: _addressNode,
                   ),
-                  _SubmitButton(),
-                ],
+                ),
               ),
-            )),
+              _SubmitButton(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -153,8 +156,8 @@ class _AddressFormView extends StatelessWidget {
       ),
     );
 
-    return Flexible(
-      child: ListView(
+    return SingleChildScrollView(
+      child: Column(
         children: [
           Gaps.vGap20,
           formList,
@@ -179,32 +182,34 @@ class _SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(12),
-      child: BlocBuilder<AddressManageBloc, AddressManageState>(
-        buildWhen: (pre, cur) => pre.status != cur.status,
-        builder: (context, state) => state.status.isSubmissionInProgress
-            ? CircularProgressIndicator()
-            : TextButton(
-                style: ButtonStyle(
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => getColor(states)),
-                    minimumSize:
-                        MaterialStateProperty.all(Size(double.maxFinite, 40)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ))),
-                child: Text(
-                  '保存',
-                  style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.all(12),
+        child: BlocBuilder<AddressManageBloc, AddressManageState>(
+          buildWhen: (pre, cur) => pre.status != cur.status,
+          builder: (context, state) => state.status.isSubmissionInProgress
+              ? CircularProgressIndicator()
+              : TextButton(
+                  style: ButtonStyle(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      backgroundColor: MaterialStateProperty.resolveWith(
+                          (states) => getColor(states)),
+                      minimumSize:
+                          MaterialStateProperty.all(Size(double.maxFinite, 40)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ))),
+                  child: Text(
+                    '保存',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: state.status.isValidated
+                      ? () => context.read<AddressManageBloc>().add(
+                            AddressManageOnSubmitted(),
+                          )
+                      : null,
                 ),
-                onPressed: state.status.isValidated
-                    ? () => context.read<AddressManageBloc>().add(
-                          AddressManageOnSubmitted(),
-                        )
-                    : null,
-              ),
+        ),
       ),
     );
   }

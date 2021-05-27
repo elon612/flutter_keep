@@ -9,12 +9,13 @@ class ProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-        delegate: SliverChildBuilderDelegate((context, index) {
-          final item = products[index];
-          return ProductItemWidget(
-            product: item,
-          );
-        }, childCount: products.length),
-        gridDelegate: ProductItemWidget.withGridDelegate());
+      delegate: SliverChildBuilderDelegate((context, index) {
+        final item = products[index];
+        return ProductItemWidget(
+          product: item,
+        );
+      }, childCount: products.length),
+      gridDelegate: ProductItemWidget.withGridDelegate(),
+    );
   }
 }
