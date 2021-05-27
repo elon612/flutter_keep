@@ -78,23 +78,29 @@ class _SearchAppBarState extends State<SearchAppBar> {
             ),
             if (widget.enabled)
               Expanded(
+                child: Container(
+                  height: double.maxFinite,
                   child: TextField(
-                focusNode: widget.focusNode,
-                controller: _controller,
-                enabled: widget.enabled,
-                onSubmitted: widget.onSubmitted,
-                onChanged: widget.onChanged,
-                textInputAction: TextInputAction.done,
-                style: TextStyle(
-                  textBaseline: TextBaseline.alphabetic,
+                    textAlignVertical: TextAlignVertical.center,
+                    focusNode: widget.focusNode,
+                    controller: _controller,
+                    enabled: widget.enabled,
+                    onSubmitted: widget.onSubmitted,
+                    onChanged: widget.onChanged,
+                    textInputAction: TextInputAction.done,
+                    style: TextStyle(
+                      textBaseline: TextBaseline.alphabetic,
+                    ),
+                    cursorColor: Color.fromARGB(255, 0, 189, 96),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: widget.hintText,
+                      hintStyle: widget.hintStyle ?? textStyle,
+                      contentPadding: const EdgeInsets.only(top: 0.0, left: -2, right: 16.0, bottom: 10.0),
+                    ),
+                  ),
                 ),
-                cursorColor: Color.fromARGB(255, 0, 189, 96),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: widget.hintText,
-                  hintStyle: widget.hintStyle ?? textStyle,
-                ),
-              ))
+              )
             else
               Text(
                 widget.hintText,

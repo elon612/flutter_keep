@@ -111,7 +111,7 @@ class _SearchPageState extends State<SearchPage> {
                 key: const Key('search_bar'),
                 enabled: true,
                 height: 32,
-                hintStyle: TextStyle(height: 1, color: Colours.textGrey),
+                // hintStyle: TextStyle(height: 1, color: Colours.textGrey),
                 hintText: '搜索商品编号或商品ID',
                 controller: _editingController,
                 onChanged: (v) =>

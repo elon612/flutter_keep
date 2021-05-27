@@ -84,10 +84,10 @@ class _RightSideItemView extends StatelessWidget {
         LayoutBuilder(
           builder: (_, BoxConstraints constraints) {
             final width =
-                (constraints.maxWidth - (_columns - 1 + 2) * _space) / _columns;
+                ((constraints.maxWidth - (_columns - 1 + 2) * _space) / _columns).floorToDouble();
             return Container(
               margin: EdgeInsets.symmetric(horizontal: _space),
-              width: double.maxFinite,
+              width: constraints.maxWidth,
               child: Wrap(
                 spacing: _space,
                 runSpacing: _space,
